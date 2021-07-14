@@ -1,0 +1,78 @@
+<div class="container qviz" *ngIf="isSelect">
+  <div class="quiz border rounded" style="max-width: 500px;">
+    <div class="qviz-title text-center p-2">
+      <h2>question quiz</h2>
+    </div>
+
+    <form [formGroup]="form">
+      <div class="select p-2 text-center">
+        <div class="text-center mt-4">
+          <label for="form-control"><b>Select Category:</b></label>
+          <select class="form-control" formControlName="selectcategory">
+            <option [value]="selectcategory.Book">Entertainment: Book</option>
+            <option [value]="selectcategory.Film">Entertainment: Film</option>
+            <option [value]="selectcategory.Music">Entertainment: Music</option>
+          </select>
+        </div>
+        <div class="text-center">
+          <label for="form-control"><b>Select Difficulty:</b></label>
+          <select class="form-control" formControlName="selectdifficulty">
+            <option [value]="selectdifficulty.Easy">Easy</option>
+            <option [value]="selectdifficulty.Medium">Medium</option>
+            <option [value]="selectdifficulty.Hard">Hard</option>
+          </select>
+        </div>
+        <div class="p-2">
+          <button class="btn btn-secondary mt-2" (click)="submit()" style="width: 150px;">
+            <h5>Quiz start</h5>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<div id="question-form" class="container border rounded p-2 m-2" *ngIf="questionArray$ | async as questions">
+  <div class="title text-center bg-secondary">
+    <h3><b>Quiz</b></h3>
+  </div>
+
+  <div class=" border rounded" *ngFor="let question of questions;  let i = index"
+        style="background-color: rgb(237, 242, 243); margin: 15px 0px 0px 10px">
+    <div class="question p-2" style="max-width: 800px;">
+      <span>{{ i+1 }}) </span><span>{{question.question}}</span>
+    </div>
+    <form class="mt-3 p-2" [formGroup]="questionForm">
+      <ng-container *ngFor="let option of question.questionOptions; let i = index">
+        
+        <input id="option{{i}}" [value]="option" 
+        type="radio" name="question" 
+        (change)="checkCorrectAnswer(question)"
+        formControlName="question"><span style="margin-right: 10px; margin-left: 5px;"> <b>{{ ProbableAnswers[i] }})</b> </span>
+        <span style="margin-right: 50px;">{{option}}</span> 
+      </ng-container>
+    </form>
+  </div>
+
+  <div class="text-center mt-3">
+    <button class="btn bg-secondary" (click)="openVerticallyCentered(content)">Check answers</button>
+  </div>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Result</h4>
+    <button type="button" class="btn close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <span>Correct answers: {{correctAnswerCount}}/10</span>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>
+
+
