@@ -80,3 +80,5 @@ export class QuizAplicationComponent implements OnInit {
     this.modalService.open(content, { centered: true });
   }
 }
+
+

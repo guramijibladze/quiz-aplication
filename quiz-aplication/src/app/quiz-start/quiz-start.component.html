@@ -1,6 +1,32 @@
-<div class="container">
-  <div class="box p-5 border rounded text-center" style="margin-top: 350px;">
-    <p>ქვიზის დაწყება</p>
-    <button class="btn btn-secondary" routerLink="quiz">click</button>
-  </div>
+<div id="quiz-start" class="container ">
+    <form class="form border rounded p-3" (ngSubmit)="signIn(form.value)" #form="ngForm" >
+        <div class="form-floating mb-2">
+          <input
+            type="text"
+            class="form-control"
+            ngModel
+            name="name"
+            required
+            id="floatingInput"
+            placeholder=" "
+          />
+          <label for="floatingInput">სახელი</label>
+        </div>
+        <div class="form-floating mb-2">
+          <input
+            type="text"
+            class="form-control"
+            ngModel
+            required
+            name="lastName"
+            id="floatingPassword"
+            placeholder=" "
+          />
+          <label for="floatingPassword">გვარი</label>
+        </div>
+
+        <button class="w-100 btn btn-lg btn-outline-secondary" type="submit">
+           Quiz start
+          </button>
+    </form>
 </div>

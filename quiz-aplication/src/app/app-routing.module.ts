@@ -9,7 +9,7 @@ const routes: Routes = [
     path: '', component: QuizStartComponent
   },
   {
-    path: 'quiz', component: QuizAplicationComponent
+    path: 'aplication', component: QuizAplicationComponent
   }
 ];
 
